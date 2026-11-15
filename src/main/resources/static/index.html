@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProductHub | Product Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #111827, #1e3a8a);
+            color: white;
+            padding: 22px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 23px;
+        }
+
+        .logo h1 {
+            font-size: 23px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 3px;
+        }
+
+        .status {
+            background: rgba(255,255,255,0.12);
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .status span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-right: 7px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+
+        /* ================= DASHBOARD CARDS ================= */
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(15,23,42,0.06);
+            border: 1px solid #e8edf5;
+        }
+
+        .stat-info p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .stat-info h2 {
+            font-size: 27px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(15,23,42,0.06);
+            border: 1px solid #e8edf5;
+            margin-bottom: 30px;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .form-header h2 {
+            font-size: 20px;
+        }
+
+        .form-header p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #475569;
+        }
+
+        .input-group input {
+            padding: 13px 14px;
+            border: 1px solid #dbe2ea;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s;
+            background: #fafbfc;
+        }
+
+        .input-group input:focus {
+            border-color: #4f46e5;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .form-actions {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 9px;
+            padding: 11px 19px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .add-btn {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .add-btn:hover {
+            background: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .cancel-btn {
+            background: #e2e8f0;
+            color: #475569;
+            display: none;
+        }
+
+        .cancel-btn:hover {
+            background: #cbd5e1;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(15,23,42,0.06);
+            border: 1px solid #e8edf5;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .table-header h2 {
+            font-size: 20px;
+        }
+
+        .table-header p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 15px 14px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f8faff;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .description {
+            color: #64748b;
+            max-width: 220px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        .category {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .quantity {
+            font-weight: 600;
+        }
+
+
+        /* ================= ACTION BUTTONS ================= */
+
+        .edit-btn,
+        .delete-btn {
+            padding: 7px 11px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .edit-btn {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .edit-btn:hover {
+            background: #ffedd5;
+        }
+
+        .delete-btn {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .delete-btn:hover {
+            background: #fee2e2;
+        }
+
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+            padding: 45px 20px;
+            color: #94a3b8;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .form-card,
+            .table-card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🛍️
+        </div>
+
+        <div>
+            <h1>ProductHub</h1>
+            <p>Product Management Dashboard</p>
+        </div>
+
+    </div>
+
+    <div class="status">
+        <span></span>
+        System Online
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="dashboard">
+
+        <div class="stat-card">
+
+            <div class="stat-info">
+                <p>Total Products</p>
+                <h2 id="totalProducts">0</h2>
+            </div>
+
+            <div class="stat-icon">
+                📦
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-info">
+                <p>Total Stock</p>
+                <h2 id="totalStock">0</h2>
+            </div>
+
+            <div class="stat-icon">
+                🏷️
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-info">
+                <p>Categories</p>
+                <h2 id="totalCategories">0</h2>
+            </div>
+
+            <div class="stat-icon">
+                📊
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FORM ================= -->
+
+    <div class="form-card">
+
+        <div class="form-header">
+
+            <div>
+                <h2 id="formTitle">Add New Product</h2>
+
+                <p>
+                    Enter the product information below
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="input-group">
+                <label>Product Image URL</label>
+                
+                <input
+                    type="text"
+                    id="imageUrl"
+                    placeholder="Paste image URL">
+            </div>
+
+            <div class="input-group">
+
+                <label>Product Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="e.g. Wireless Headphones">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Description</label>
+
+                <input
+                    type="text"
+                    id="description"
+                    placeholder="Enter product description">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Price (₹)</label>
+
+                <input
+                    type="number"
+                    id="price"
+                    placeholder="e.g. 2499">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Category</label>
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="e.g. Electronics">
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Quantity</label>
+
+                <input
+                    type="number"
+                    id="quantity"
+                    placeholder="e.g. 50">
+
+            </div>
+            
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                class="add-btn"
+                onclick="saveProduct()">
+
+                ＋ Add Product
+
+            </button>
+
+
+            <button
+                class="cancel-btn"
+                id="cancelBtn"
+                onclick="cancelEdit()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= PRODUCT TABLE ================= -->
+
+    <div class="table-card">
+
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>Product Inventory</h2>
+
+                <p>
+                    Manage your products and stock
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        
+                        <th>Image</th>
+
+                        <th>ID</th>
+
+                        <th>Product</th>
+
+                        <th>Description</th>
+
+                        <th>Price</th>
+
+                        <th>Category</th>
+
+                        <th>Stock</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="productTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="emptyMessage"
+            class="empty"
+            style="display:none;">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h3>No products yet</h3>
+
+            <p>
+                Add your first product using the form above.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<footer>
+
+    ProductHub © 2026 · Product Management System
+
+</footer>
+
+
+
+<script>
+
+    const API_URL = "/products";
+
+    let editingId = null;
+
+
+    // ================= LOAD PRODUCTS =================
+
+    loadProducts();
+
+
+    function loadProducts() {
+
+        fetch(API_URL)
+
+            .then(response => response.json())
+
+            .then(products => {
+
+                const table =
+                    document.getElementById("productTable");
+
+                const emptyMessage =
+                    document.getElementById("emptyMessage");
+                
+                table.innerHTML = "";
+
+
+                updateDashboard(products);
+
+
+                if (products.length === 0) {
+
+                    emptyMessage.style.display = "block";
+
+                    return;
+                }
+
+
+                emptyMessage.style.display = "none";
+
+
+                products.forEach(product => {
+
+                    const row =
+                        document.createElement("tr");
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            <img
+                                src="${product.imageUrl}"
+                                width="60"
+                                height="60"
+                                style="object-fit: cover; border-radius: 10px;"
+                                alt="${product.name}">
+                         </td>
+                        
+                        <td>
+                            #${product.id}
+                        </td>
+
+                        <td>
+                            <span class="product-name">
+                                ${product.name}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="description">
+                                ${product.description}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="price">
+                                ₹${Number(product.price).toLocaleString("en-IN")}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="category">
+                                ${product.category}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="quantity">
+                                ${product.quantity}
+                            </span>
+                        </td>
+
+                        
+
+                            <button
+                                class="edit-btn"
+                                onclick="editProduct(${product.id})">
+
+                                ✏️ Edit
+
+                            </button>
+
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteProduct(${product.id})">
+
+                                🗑️ Delete
+
+                            </button>
+
+                        </td>
+                    `;
+
+
+                    table.appendChild(row);
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+                alert("Unable to connect to the server.");
+
+            });
+
+    }
+
+
+
+    // ================= DASHBOARD =================
+
+    function updateDashboard(products) {
+
+        document.getElementById("totalProducts").innerText =
+            products.length;
+
+
+        const totalStock =
+            products.reduce(
+                (total, product) =>
+                    total + Number(product.quantity),
+                0
+            );
+
+
+        document.getElementById("totalStock").innerText =
+            totalStock;
+
+
+        const categories =
+            new Set(
+                products.map(product => product.category)
+            );
+
+
+        document.getElementById("totalCategories").innerText =
+            categories.size;
+
+    }
+
+
+
+    // ================= ADD / UPDATE =================
+
+    function saveProduct() {
+
+        const imageUrl =
+                    document.getElementById("imageUrl").value.trim();
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const description =
+            document.getElementById("description").value.trim();
+
+        const price =
+            document.getElementById("price").value;
+
+        const category =
+            document.getElementById("category").value.trim();
+
+        const quantity =
+            document.getElementById("quantity").value;
+
+        
+        if (
+            !imageUrl||
+            !name ||
+            !description ||
+            !price ||
+            !category ||
+            !quantity 
+            
+        ) {
+
+            alert("Please fill all fields.");
+
+            return;
+        }
+
+
+        const product = {
+
+            imageUrl: imageUrl,
+
+            name: name,
+
+            description: description,
+
+            price: Number(price),
+
+            category: category,
+
+            quantity: Number(quantity)
+
+
+        };
+
+
+        let url = API_URL;
+
+        let method = "POST";
+
+
+        if (editingId !== null) {
+
+            url = `${API_URL}/${editingId}`;
+
+            method = "PUT";
+
+        }
+
+
+        fetch(url, {
+
+            method: method,
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify(product)
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error("Failed to save product");
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(() => {
+
+            alert(
+                editingId === null
+                    ? "Product added successfully! 🎉"
+                    : "Product updated successfully! ✅"
+            );
+
+
+            clearForm();
+
+            loadProducts();
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            alert("Something went wrong.");
+
+        });
+
+    }
+
+
+
+    // ================= EDIT =================
+
+    function editProduct(id) {
+
+        fetch(`${API_URL}/${id}`)
+
+            .then(response => response.json())
+
+            .then(product => {
+
+                document.getElementById("imageUrl").value =
+                    product.imageUrl || "";
+
+                document.getElementById("name").value =
+                    product.name;
+
+                document.getElementById("description").value =
+                    product.description;
+
+                document.getElementById("price").value =
+                    product.price;
+
+                document.getElementById("category").value =
+                    product.category;
+
+                document.getElementById("quantity").value =
+                    product.quantity;
+                
+                
+                editingId = id;
+
+
+                document.getElementById("formTitle").innerText =
+                    "Update Product";
+
+
+                document.querySelector(".add-btn").innerText =
+                    "✓ Update Product";
+
+
+                document.getElementById("cancelBtn")
+                    .style.display = "inline-block";
+
+
+                window.scrollTo({
+                    top: 250,
+                    behavior: "smooth"
+                });
+
+            });
+
+    }
+
+
+
+    // ================= DELETE =================
+
+    function deleteProduct(id) {
+
+        if (
+            !confirm(
+                "Are you sure you want to delete this product?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        fetch(`${API_URL}/${id}`, {
+
+            method: "DELETE"
+
+        })
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error("Delete failed");
+
+            }
+
+
+            alert("Product deleted successfully! 🗑️");
+
+
+            loadProducts();
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            alert("Unable to delete product.");
+
+        });
+
+    }
+
+
+
+    // ================= CANCEL =================
+
+    function cancelEdit() {
+
+        clearForm();
+
+    }
+
+
+
+    // ================= CLEAR FORM =================
+
+    function clearForm() {
+
+        document.getElementById("imageUrl").value = "";
+
+        document.getElementById("name").value = "";
+
+        document.getElementById("description").value = "";
+
+        document.getElementById("price").value = "";
+
+        document.getElementById("category").value = "";
+
+        document.getElementById("quantity").value = "";
+
+        
+        editingId = null;
+
+
+        document.getElementById("formTitle").innerText =
+            "Add New Product";
+
+
+        document.querySelector(".add-btn").innerText =
+            "＋ Add Product";
+
+
+        document.getElementById("cancelBtn")
+            .style.display = "none";
+
+    }
+
+</script>
+
+</body>
+</html>
